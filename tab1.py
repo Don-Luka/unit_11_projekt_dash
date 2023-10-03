@@ -1,0 +1,23 @@
+from dash import dcc, html
+import plotly.graph_objects as go
+
+def render_tab(df):
+
+    '''
+    sales-range = id pickera
+    bar-sales = id wykresu słupkowego
+    chloropleth-sales = id wykresu na mapie
+
+    tran-date = dane pobrane z DataFrame
+    '''
+
+    layout = html.Div([html.H1('Sprzedaż globalna',style={'text-align':'center'}),
+                        html.Div([dcc.DatePickerRange(id='sales-range',
+                        start_date=df['tran_date'].min(),
+                        end_date=df['tran_date'].max(),
+                        display_format='YYYY-MM-DD')],style={'width':'100%','text-align':'center'}),
+                        html.Div([html.Div([dcc.Graph(id='bar-sales')],style={'width':'50%'}),
+                        html.Div([dcc.Graph(id='choropleth-sales')],style={'width':'50%'})],style={'display':'flex'})
+                        ])
+
+    return layout
