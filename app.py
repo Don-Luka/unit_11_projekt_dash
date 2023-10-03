@@ -15,6 +15,10 @@ import tab1
 import tab2
 import tab3
 
+import dash_auth
+
+USERNAME_PASSWORD = [['user','pass']]
+
 
 class db:
     def __init__(self):
@@ -59,9 +63,11 @@ df.merge()
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
+
 app = dash.Dash(__name__, 
                 external_stylesheets=external_stylesheets,
                 suppress_callback_exceptions=True)
+auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD)
 
 # ogólny layout
 app.layout = html.Div([html.Div([dcc.Tabs(id='tabs',value='tab-1',children=[
